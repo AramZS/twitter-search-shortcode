@@ -4,6 +4,7 @@ twitter-search-shortcode
 This is a WordPress plugin that allows you to place a shortcode in your post that will archive a Twitter search term, including hashtags. 
 
 === Plugin Name ===
+
 Contributors: aramzs
 Donate link: http://aramzs.me/
 Tags: twitter, shortcode, archival
