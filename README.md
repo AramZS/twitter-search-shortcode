@@ -28,7 +28,7 @@ Shortcode [searchtwitter] options:
 
     The maximum amount of tweets that can be retrieved is 1500.
 	
-Finally, this plugin would not have been possible without the kind sharing of code by [Daniel Thorogood](http://twitter.com/SLODeveloper) and styling information by [Kim Bui](http://twitter.com/kimbui). It wouldn't have been possible to get that code without [#wjchat] (http://wjchat.webjournalist.org/). Thanks to all of them! 
+Finally, this plugin would not have been possible without the kind sharing of code by [Daniel Thorogood](http://twitter.com/SLODeveloper), who wrote almost all of the code that interacts with Twitter, and styling information by [Kim Bui](http://twitter.com/kimbui). It wouldn't have been possible to get that code without [#wjchat] (http://wjchat.webjournalist.org/). Thanks to all of them! 
 
 == Installation ==
 
