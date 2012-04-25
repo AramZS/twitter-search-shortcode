@@ -36,7 +36,7 @@ This section describes how to install the plugin and get it working.
 
 = I posted one Twitter chat, but it was the wrong one, how do I change it? =
 
-This plugin does not yet support refreshing archives through the shortcode controls. In order to delete and recreate a Twitter search archive on your post, you have to edit your post, go into Custom Fields, and delete the content of the Value field for "twitter_search_archive". Then you'll need to resave the post with your new plugin. 
+This plugin does not yet support refreshing archives through the shortcode controls. In order to delete and recreate a Twitter search archive on your post, you have to edit your post, go into Custom Fields, and delete the content of the Value field for "twitter_search_archive". Then you'll need to resave the post with your new shortcode entry. 
 
 = I used your shortcode in an area that wasn't a post and a week later all my tweets were gone! WTF? =
 
@@ -46,7 +46,7 @@ The archival function of the plugin is only functional with posts at this time. 
 
 No you cannot. At this time the plugin does not support more than one archive per post.
 
-= When I first save the post and go to look at it, it loads really slowly. What's up wit that? =
+= When I first save the post and go to look at it, it loads really slowly. What's up with that? =
 
 The first time you save a post using the Twitter Archival shortcode and post or view it, your server must contact Twitter and retrieve all the relevant Tweets. This takes time and it will sometimes be slow. After the first time, it will only be pulling from the archive stored on your server, and it will be much faster. 
 
