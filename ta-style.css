@@ -1,0 +1,15 @@
+.ta-twitter_user  { 
+	float:left; 
+	width:100%;
+} 
+
+.ta-twitter_user .ta-image img {
+	width:48px; 
+	height:48px; 
+	float:left; 
+	margin-right:10px; 
+}
+
+.ta-twitter_user ul {
+	list-style-type:none; 
+}
