@@ -68,14 +68,15 @@ function twitter_search_archive( $atts ) {
 			'for' => 'Chronotope',
 			'within' => '',
 			'order' => 'reverse',
-			'title' => 'Twitter Archive for'
+			'title' => 'Twitter Archive for',
+			'blackbird' => 'no'
 		), $atts ) );
 		
 		$safefor = urlencode($for);
 		
 		$twitterquery = get_twitter_query($for);
 		
-		$queryresults = execute_twitter_query($twitterquery, $within, $order, $keepGoing, $archive);
+		$queryresults = execute_twitter_query($twitterquery, $within, $order, $keepGoing, $blackbird, $archive);
 		
 		//If the user does not indicate 'none' for no title, use the default or title entered. 
 		if ( !($title=="none") ){
@@ -108,7 +109,7 @@ function get_twitter_query($query) {
 
 }
 
-function execute_twitter_query($file, $datelimit, $ordered, $keepGoing) {
+function execute_twitter_query($file, $datelimit, $ordered, $keepGoing, $blackbird) {
 
 $execute_archive = '';
 
@@ -120,7 +121,7 @@ $execute_archive = '';
 					$xml = simplexml_load_file($thefile);
 
 						
-					$execute_archive .= output_data($xml,$datelimit,$ordered,$keepGoing);
+					$execute_archive .= output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird);
 
 				}
 				else 
@@ -133,7 +134,7 @@ $execute_archive = '';
 
 }
 
-function output_data($xml,$datelimit,$ordered,$keepGoing)
+function output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird)
 {
 
 	$output_archive = '';
@@ -160,53 +161,87 @@ function output_data($xml,$datelimit,$ordered,$keepGoing)
 		//I needed to use this while testing, because I clearly didn't get enough sleep the day I wrote this. 
 		//print_r($orderedxml);
 
-	
-		foreach($orderedxml as $entry)
+		if (($blackbird == 'yes') || ($blackbird == 'Yes'))
 		{
-			$uri=$entry->author->uri;
-			$name=$entry->author->name;
-			$image=$entry->link[1]['href'];
-			$timestamp = $entry->published;
-			$unixtime = strtotime($timestamp);
-			$datetime = date('h:i:s A, n-j-y', $unixtime);
+			$blackbirdclass = new Blackbirdpie();
 			
-			//If you've designated a date to retrieve from, either a year, month or day, you can restrict Tweets that appear only to that period. 
-			if (!empty($datelimit)) {
-				//The given date string must be in the 2012-4-24 format
-				//If it matches the published time of the tweet, save it to the object. 
-				//Otherwise, don't.
-				if(strstr($entry->published,$datelimit))
-				{
-					$output_archive .= "<div class=\"ta-twitter_user ta\">
-					
-					<ul>
-					<li class=\"ta-image ta\"><img class=\"ta-avatar ta\" src=\"$image\"></li>
-					<li class=\"ta-published ta\">$datetime</li>
-					<li class=\"ta-user ta\"><a href=\"$uri\" target=\"_blank\">$name</a></li>
-					<li class=\"ta-description ta\">$entry->title</li>
-					
-					</ul>
-					</div>";
-					$keepGoing = true;
-				}
-				else { $keepGoing = false; }
-			} 
-			else {
+			foreach($orderedxml as $entry)
+			{
+				$link=$entry->link[0]['href'];
+
+				
+				//If you've designated a date to retrieve from, either a year, month or day, you can restrict Tweets that appear only to that period. 
+				if (!empty($datelimit)) {
+					//The given date string must be in the 2012-4-24 format
+					//If it matches the published time of the tweet, save it to the object. 
+					//Otherwise, don't.
+					if(strstr($entry->published,$datelimit))
+					{
+						$output_archive .= $blackbirdclass->render_tweet(false, $link, false, false);
+						$keepGoing = true;
+					}
+					else { $keepGoing = false; }
+				} //End of datecheck. 
+				else {
+				
+						$output_archive .= $blackbirdclass->render_tweet(false, $link, false, false);
+				
+				} 
 			
-					$output_archive .= "<div class=\"ta-twitter_user ta\">
-					
-					<ul>
-					<li class=\"ta-image ta\"><img class=\"ta-avatar ta\" src=\"$image\"></li>
-					<li class=\"ta-published ta\">$datetime</li>
-					<li class=\"ta-user ta\"><a href=\"$uri\" target=\"_blank\">$name</a></li>
-					<li class=\"ta-description ta\">$entry->title</li>
-					
-					</ul>
-					</div>";
-			
-			} //End of datecheck. 
+			} //end foreach		
 		
 		}
+		//If Twitter Blackbird Pie is not activated. 
+		else 
+		{
+			foreach($orderedxml as $entry)
+			{
+				$uri=$entry->author->uri;
+				$name=$entry->author->name;
+				$image=$entry->link[1]['href'];
+				$timestamp = $entry->published;
+				$unixtime = strtotime($timestamp);
+				$datetime = date('h:i:s A, n-j-y', $unixtime);
+				
+				//If you've designated a date to retrieve from, either a year, month or day, you can restrict Tweets that appear only to that period. 
+				if (!empty($datelimit)) {
+					//The given date string must be in the 2012-4-24 format
+					//If it matches the published time of the tweet, save it to the object. 
+					//Otherwise, don't.
+					if(strstr($entry->published,$datelimit))
+					{
+						$output_archive .= "<div class=\"ta-twitter_user ta\">
+						
+						<ul>
+						<li class=\"ta-image ta\"><img class=\"ta-avatar ta\" src=\"$image\"></li>
+						<li class=\"ta-published ta\">$datetime</li>
+						<li class=\"ta-user ta\"><a href=\"$uri\" target=\"_blank\">$name</a></li>
+						<li class=\"ta-description ta\">$entry->title</li>
+						
+						</ul>
+						</div>";
+						$keepGoing = true;
+					}
+					else { $keepGoing = false; }
+				} //End of datecheck. 
+				else {
+				
+						$output_archive .= "<div class=\"ta-twitter_user ta\">
+						
+						<ul>
+						<li class=\"ta-image ta\"><img class=\"ta-avatar ta\" src=\"$image\"></li>
+						<li class=\"ta-published ta\">$datetime</li>
+						<li class=\"ta-user ta\"><a href=\"$uri\" target=\"_blank\">$name</a></li>
+						<li class=\"ta-description ta\">$entry->title</li>
+						
+						</ul>
+						</div>";
+				
+				} 
+			
+			} //end foreach.
+			
+		} // end blackbirdpie no.
 	}
 	
 	return $output_archive;
