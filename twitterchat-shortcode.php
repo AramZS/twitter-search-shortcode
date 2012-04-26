@@ -166,6 +166,7 @@ function output_data($xml,$datelimit,$ordered,$keepGoing)
 			$uri=$entry->author->uri;
 			$name=$entry->author->name;
 			$image=$entry->link[1]['href'];
+			$link=$entry->link[0]['href'];
 			$timestamp = $entry->published;
 			$unixtime = strtotime($timestamp);
 			$datetime = date('h:i:s A, n-j-y', $unixtime);
@@ -181,7 +182,7 @@ function output_data($xml,$datelimit,$ordered,$keepGoing)
 					
 					<ul>
 					<li class=\"ta-image ta\"><img class=\"ta-avatar ta\" src=\"$image\"></li>
-					<li class=\"ta-published ta\">$datetime</li>
+					<li class=\"ta-published ta\"><a href=\"$link\" target=\"_blank\">$datetime</a></li>
 					<li class=\"ta-user ta\"><a href=\"$uri\" target=\"_blank\">$name</a></li>
 					<li class=\"ta-description ta\">$entry->title</li>
 					
@@ -197,7 +198,7 @@ function output_data($xml,$datelimit,$ordered,$keepGoing)
 					
 					<ul>
 					<li class=\"ta-image ta\"><img class=\"ta-avatar ta\" src=\"$image\"></li>
-					<li class=\"ta-published ta\">$datetime</li>
+					<li class=\"ta-published ta\"><a href=\"$link\">$datetime</a></li>
 					<li class=\"ta-user ta\"><a href=\"$uri\" target=\"_blank\">$name</a></li>
 					<li class=\"ta-description ta\">$entry->title</li>
 					
