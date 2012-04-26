@@ -63,9 +63,10 @@ $execute_archive = '';
 				{
 					$xml = simplexml_load_file($thefile);
 
-						
+					if (!(empty($xml->entry))){	
 					$execute_archive .= output_data($xml,$datelimit,$ordered,$keepGoing);
-
+					}
+					
 				}
 				else 
 				{
