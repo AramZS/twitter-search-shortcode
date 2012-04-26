@@ -189,16 +189,7 @@ function output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird)
 				
 						$output_archive .= $blackbirdclass->render_tweet(false, $link, false, false);
 				
-				}
-				
-				$errorcheck = "<!-- end of tweet -->\"There was a problem connecting to Twitter";
-
-				if ( strstr($output_archive, $errorcheck)) 
-				{
-				
-					break;
-				
-				}
+				} 
 			
 			} //end foreach		
 		
