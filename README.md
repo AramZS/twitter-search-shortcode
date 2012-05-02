@@ -1,10 +1,4 @@
-twitter-search-shortcode
-========================
-
-This is a WordPress plugin that allows you to place a shortcode in your post that will archive a Twitter search term, including hashtags. 
-
 === Plugin Name ===
-
 Contributors: aramzs
 Donate link: http://aramzs.me/
 Tags: twitter, shortcode, archival
@@ -23,6 +17,7 @@ Shortcode [searchtwitter] options:
 *   [searchtwitter for="#term" within="2012-04-24"] - The within attribute designates the limiting date for the search. If must be in the YYYY-MM-DD format, as shown above. You can limit searches by full date, as above, or by YYYY-MM or YYYY. However, there is no escaping Twitter's limit that only allows the plugin to retrieve the last 7 days of Tweets maximum. Default is no limitations. 
 *   [searchtwitter for="#term" order="normal"] - By default the plugin displays and retrieves the Twitter list in reverse date format, with the earliest Tweet on top, and the latest Tweet on the bottom. You can put it in chronological order by designating the order attribute as "normal".
 *  [searchtwitter for="#term" title="Twitter Archival listing of"] - By default the shortcode generates a h3 header for your list of Tweets that reads "Twitter Archive for" and is followed by your search term hyperlinked to Twitter's search page. You can change what precedes the title using this attribute. Or you can enter "none" to eliminate the entire h3 title section. 
+*  [searchtwitter for="#term" blackbird="yes"] - HIGHLY EXPERIMENTAL. This will only work if you have the Twitter Blackbird Pie plugin installed. If you do, the shortcode queries the plugin and will attempt to skin all colected tweets using the Blackbird Pie method. Current testing indicates that the Blackbird plugin skins each tweet with an individual query to Twitter. As a result, for any collections of tweets over a certain unknown number Twitter will stop allowing you to query it and the remaining Tweets will fail to show up. 
 
     This plugin comes with default CSS styling. If you don't like it, you don't need to alter the plugin (and chance having your styling erased by an upgrade). Instead just create a stylesheet in your stylesheet directory called 'user-ta-style.css' and it will completely replace my stylesheet. 
 
@@ -56,6 +51,10 @@ No you cannot. At this time the plugin does not support more than one archive pe
 
 The first time you save a post using the Twitter Archival shortcode and post or view it, your server must contact Twitter and retrieve all the relevant Tweets. This takes time and it will sometimes be slow. After the first time, it will only be pulling from the archive stored on your server, and it will be much faster. 
 
+= The timestamps on the tweets are all wrong! How can I get them to show my time? =
+
+Currently they all show GMT. This is because I have not yet figured out how to tell PHP to convert the time. If you know how to do this tell me. Until then, it will be only GMT. 
+
 = When people change their avatars, it changes in my archive. =
 
 Currently the plugin does not archive avatars. 
@@ -74,11 +73,16 @@ I don't think so, I hope not, but I can't tell you for certain. You use the plug
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
+1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.6 =
+* Fixed broken div.
+* Time stamps now link to original Tweets.
+* Added experimental Twitter Blackbird Pie support. 
+* Further error checking added. 
 
 = 0.5 =
 * Finally got it working. 
