@@ -4,7 +4,7 @@
 Plugin Name: Twitter Archival Shortcode
 Plugin URI: http://aramzs.me/twitterarchival
 Description: This plugin allows you to place a shortcode in your post that will archive a Twitter search term, including hashtags. 
-Version: 0.5
+Version: 0.6
 Author: Aram Zucker-Scharff
 Author URI: http://aramzs.me
 License: GPL2
