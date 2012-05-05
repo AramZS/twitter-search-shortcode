@@ -17,3 +17,7 @@
 .ta-twitter_user ul.ta-ul {
 	list-style-type:none; 
 }
+
+.ta-twitter_user .ta-ul li {
+	list-style-type:none; 
+}
