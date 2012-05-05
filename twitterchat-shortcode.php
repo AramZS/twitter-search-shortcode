@@ -89,6 +89,8 @@ function twitter_search_archive( $atts ) {
 		
 		$archive .= "</div><!--End of Twitter Archive-->";
 		
+		$archive = bbg_pb_twitterize($archive);
+		
 		update_post_meta($post_id, 'twitter_search_archive', $archive);
 	
 	}
@@ -260,6 +262,21 @@ function output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird)
 	
 	return $output_archive;
 }
+
+//Function to make usernames and hashtags hot links via Boone Gorges - https://github.com/boonebgorges
+function bbg_pb_twitterize( $content ) {
+    // Turn @-mentions into links
+    $content = preg_replace("/[@]+([A-Za-z0-9-_]+)/", "<a href=\"http://twitter.com/\\1\" target=\"_blank\">\\0</a>", $content );
+
+    // Turn hashtags into links
+    $content = preg_replace("/ [#]+([A-Za-z0-9-_]+)/", " <a href=\"http://twitter.com/search?q=%23\\1\" target=\"_blank\">\\0</a>", $content );
+	
+	//A little addition of my own for this situation, to turn links into links. -Aram
+	$reg_exUrl = "/\040(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+	$content = preg_replace($reg_exUrl, " <a href=\"\\0\">\\0</a>", $content );
+
+    return $content;
+} 
 
 add_shortcode( 'searchtwitter', 'twitter_search_archive' );
 
