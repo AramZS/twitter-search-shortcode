@@ -226,7 +226,7 @@ function output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird)
 					{
 						$output_archive .= "<div class=\"ta-twitter_user ta\">
 						
-						<ul>
+						<ul class=\"ta-ul\">
 						<li class=\"ta-image ta\"><img class=\"ta-avatar ta\" src=\"$image\"></li>
 						<li class=\"ta-published ta\"><a href=\"$link\">$datetime</a></li>
 						<li class=\"ta-user ta\"><a href=\"$uri\" target=\"_blank\">$name</a></li>
@@ -242,7 +242,7 @@ function output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird)
 				
 						$output_archive .= "<div class=\"ta-twitter_user ta\">
 						
-						<ul>
+						<ul class=\"ta-ul\">
 						<li class=\"ta-image ta\"><img class=\"ta-avatar ta\" src=\"$image\"></li>
 						<li class=\"ta-published ta\"><a href=\"$link\">$datetime</a></li>
 						<li class=\"ta-user ta\"><a href=\"$uri\" target=\"_blank\">$name</a></li>
