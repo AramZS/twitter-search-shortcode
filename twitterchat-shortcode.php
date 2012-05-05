@@ -4,7 +4,7 @@
 Plugin Name: Twitter Archival Shortcode
 Plugin URI: http://aramzs.me/twitterarchival
 Description: This plugin allows you to place a shortcode in your post that will archive a Twitter search term, including hashtags. 
-Version: 0.6
+Version: 0.64
 Author: Aram Zucker-Scharff
 Author URI: http://aramzs.me
 License: GPL2
@@ -116,25 +116,49 @@ function execute_twitter_query($file, $datelimit, $ordered, $keepGoing, $blackbi
 
 $execute_archive = '';
 
-	for($page=15;$page>=1;$page--)
-		{
-			$thefile="$file&page=$page";
-			if (fopen ($file, "r")) 
-				{
-					$xml = simplexml_load_file($thefile);
+	//If you don't want it to be reversed, we need to query the pages in proper order. 
+	if ($ordered == 'reverse') {
+		for($page=15;$page>=1;$page--)
+			{
+				$thefile="$file&page=$page";
+				if (fopen ($file, "r")) 
+					{
+						$xml = simplexml_load_file($thefile);
 
-					if (!(empty($xml->entry))){
+						if (!(empty($xml->entry))){
+							
+						$execute_archive .= output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird);
 						
-					$execute_archive .= output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird);
-					
+						}
+						
 					}
-					
-				}
-				else 
-				{
-					$execute_archive .= " Sorry, Twitter doesn't seem to be working right now. Try again later.";
-				}
-		}
+					else 
+					{
+						$execute_archive .= " Sorry, Twitter doesn't seem to be working right now. Try again later.";
+					}
+			}
+	} else {
+		for($page=1;$page<=15;$page++)
+			{
+				$thefile="$file&page=$page";
+				if (fopen ($file, "r")) 
+					{
+						$xml = simplexml_load_file($thefile);
+
+						if (!(empty($xml->entry))){
+							
+						$execute_archive .= output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird);
+						
+						}
+						
+					}
+					else 
+					{
+						$execute_archive .= " Sorry, Twitter doesn't seem to be working right now. Try again later.";
+					}
+			}
+	}
+	
 		
 		return $execute_archive;
 
