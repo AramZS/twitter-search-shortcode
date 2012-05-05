@@ -4,7 +4,7 @@
 Plugin Name: Twitter Archival Shortcode
 Plugin URI: http://aramzs.me/twitterarchival
 Description: This plugin allows you to place a shortcode in your post that will archive a Twitter search term, including hashtags. 
-Version: 0.64
+Version: 0.67
 Author: Aram Zucker-Scharff
 Author URI: http://aramzs.me
 License: GPL2
@@ -60,7 +60,7 @@ function twitter_search_archive( $atts ) {
 	add_post_meta($post_id, 'twitter_search_archive', '', true);
 
 	$checkcache=get_post_meta($post_id, 'twitter_search_archive', true);
-	if (empty($checkcache)) {
+	
 		
 		//Create object to contain the archive.
 		$archive = '<div class="twitter-archival-container ta">';
@@ -72,6 +72,15 @@ function twitter_search_archive( $atts ) {
 			'title' => 'Twitter Archive for',
 			'blackbird' => 'no'
 		), $atts ) );
+		
+		//Add post meta to track and check the options that the user is feeding in. 
+		add_post_meta($post_id, 'twitter_archive_control', '', true);
+		$controlcheck = $for . "," . $within . "," . $order . "," . $title . "," . $blackbird;
+		$checkcontrol = get_post_meta($post_id, 'twitter_archive_control', true);
+	
+	//Check if the options in the shortcode are the same as they were previously. If not let us refresh the archive.
+	if (!($controlcheck == $checkcontrol)) {
+	
 		
 		$minushtml = strip_tags($for);
 		$safefor = urlencode($minushtml);
@@ -92,6 +101,7 @@ function twitter_search_archive( $atts ) {
 		$archive = bbg_pb_twitterize($archive);
 		
 		update_post_meta($post_id, 'twitter_search_archive', $archive);
+		update_post_meta($post_id, 'twitter_archive_control', $controlcheck);
 	
 	}
 	else {
