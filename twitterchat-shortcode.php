@@ -73,9 +73,10 @@ function twitter_search_archive( $atts ) {
 			'blackbird' => 'no'
 		), $atts ) );
 		
-		$safefor = urlencode($for);
+		$minushtml = strip_tags($for);
+		$safefor = urlencode($minushtml);
 		
-		$twitterquery = get_twitter_query($for);
+		$twitterquery = get_twitter_query($safefor);
 		
 		$queryresults = execute_twitter_query($twitterquery, $within, $order, $keepGoing, $blackbird);
 		
@@ -282,7 +283,56 @@ function style_twitter_search_archive () {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'style_twitter_search_archive' );
+add_action( 'wp_enqueue_scripts', 'style_twitter_search_archive', 1 );
 
 
+// Since anything that auto-styles Twitter hashtags and at signs will mess up the workings of the shortcode, here's a built in alternative. No need to run another plugin. 
+function zs_twitter_linked() {
+	wp_enqueue_script('jquery-cycle', get_bloginfo('stylesheet_directory') . '/library/extensions/jquery.cycle.all.js">', array('jquery'));
+	?>
+		<script type="text/javascript">
+		<!--Note here the \s at the begining of the regular expression here. This is to enforce that it will only select from hashtags with a space in front of them. Otherwise it may alter links to anchors.-->
+			hashtag_regexp = /\s#([a-zA-Z0-9]+)/g;
+
+			function linkHashtags(text) {
+				return text.replace(
+					hashtag_regexp,
+					' <a class="hashtag" target="_blank" href="http://twitter.com/#search?q=$1">#$1</a>'
+				);
+			}
+
+			jQuery(document).ready(function(){
+				jQuery('p').each(function() {
+					jQuery(this).html(linkHashtags(jQuery(this).html()));
+				});
+			});
+			
+			jQuery('p').html(linkHashtags(jQuery('p').html()));  
+
+			
+		</script>
+		<script type="text/javascript">
+			
+			at_regexp = /\s\u0040([a-zA-Z0-9]+)/g;
+			
+			function linkAt(text) {
+				return text.replace(
+					at_regexp,
+					' <a class="twitter-user" target="_blank" href="http://twitter.com/$1">@$1</a>'
+				);
+			}
+
+			jQuery(document).ready(function(){
+				jQuery('p').each(function() {
+					jQuery(this).html(linkAt(jQuery(this).html()));
+				});
+			});
+			
+			jQuery('p').html(linkAt(jQuery('p').html()));  			
+			
+		</script>
+	<?php
+}
+
+add_action('wp_head', 'zs_twitter_linked');
 ?>
