@@ -39,6 +39,17 @@ License: GPL2
 //Received through the kind folks who run #wjchat 
 //Styling comes from Kim Bui at http://twitter.com/kimbui
 
+include 'ta-options.php';
+
+$ta_option_array = get_option('ta_options');
+$ta_datetime_option = $ta_option_array['datetime'];
+				
+//Doc: http://php.net/manual/en/function.date-default-timezone-set.php
+
+if (!empty($ta_datetime_option)){
+	date_default_timezone_set($ta_datetime_option);
+} 
+
 //Establish date variable.
 $now=getdate();
 //$date="2010-02-11T05:59:21Z";
@@ -248,12 +259,7 @@ function output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird)
 				$uri=$entry->author->uri;
 				$name=$entry->author->name;
 				$image=$entry->link[1]['href'];
-				
-				
-				//Insert into here code to set timezone. 
-				//Doc: http://php.net/manual/en/function.date-default-timezone-set.php
-				date_default_timezone_set('America/New_York');
-				
+				//Moving the date conversion up top. 
 				$timestamp = $entry->published;
 				$link=$entry->link[0]['href'];
 				$unixtime = strtotime($timestamp);
