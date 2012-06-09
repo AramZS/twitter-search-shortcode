@@ -251,6 +251,7 @@ function output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird)
 				
 				
 				//Insert into here code to set timezone. 
+				//Doc: http://php.net/manual/en/function.date-default-timezone-set.php
 				date_default_timezone_set('America/New_York');
 				
 				$timestamp = $entry->published;
