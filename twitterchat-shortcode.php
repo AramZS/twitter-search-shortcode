@@ -248,10 +248,17 @@ function output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird)
 				$uri=$entry->author->uri;
 				$name=$entry->author->name;
 				$image=$entry->link[1]['href'];
+				
+				
+				//Insert into here code to set timezone. 
+				date_default_timezone_set('America/New_York');
+				
 				$timestamp = $entry->published;
 				$link=$entry->link[0]['href'];
 				$unixtime = strtotime($timestamp);
 				$datetime = date('h:i:s A, n-j-y', $unixtime);
+				
+				
 				
 				//If you've designated a date to retrieve from, either a year, month or day, you can restrict Tweets that appear only to that period. 
 				if (!empty($datelimit)) {
