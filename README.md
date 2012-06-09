@@ -16,8 +16,8 @@ Shortcode [searchtwitter] options:
 *   [searchtwitter for="#term"] - The 'for' attribute allows you to designate the search term you wish to search for and archive. You can use any term you'd normally but into the search.twitter.com search box. If you don't put anything in there, it will just search for me, which is cool and all, but probobly not what you want. It doesn't have to be a hashtag.
 *   [searchtwitter for="#term" within="2012-04-24"] - The within attribute designates the limiting date for the search. If must be in the YYYY-MM-DD format, as shown above. You can limit searches by full date, as above, or by YYYY-MM or YYYY. However, there is no escaping Twitter's limit that only allows the plugin to retrieve the last 7 days of Tweets maximum. Default is no limitations. 
 *   [searchtwitter for="#term" order="normal"] - By default the plugin displays and retrieves the Twitter list in reverse date format, with the earliest Tweet on top, and the latest Tweet on the bottom. You can put it in chronological order by designating the order attribute as "normal".
-*  [searchtwitter for="#term" title="Twitter Archival listing of"] - By default the shortcode generates a h3 header for your list of Tweets that reads "Twitter Archive for" and is followed by your search term hyperlinked to Twitter's search page. You can change what precedes the title using this attribute. Or you can enter "none" to eliminate the entire h3 title section. 
-*  [searchtwitter for="#term" blackbird="yes"] - HIGHLY EXPERIMENTAL. This will only work if you have the Twitter Blackbird Pie plugin installed. If you do, the shortcode queries the plugin and will attempt to skin all colected tweets using the Blackbird Pie method. Current testing indicates that the Blackbird plugin skins each tweet with an individual query to Twitter. As a result, for any collections of tweets over a certain unknown number Twitter will stop allowing you to query it and the remaining Tweets will fail to show up. 
+*   [searchtwitter for="#term" title="Twitter Archival listing of"] - By default the shortcode generates a h3 header for your list of Tweets that reads "Twitter Archive for" and is followed by your search term hyperlinked to Twitter's search page. You can change what precedes the title using this attribute. Or you can enter "none" to eliminate the entire h3 title section. 
+*   [searchtwitter for="#term" blackbird="yes"] - HIGHLY EXPERIMENTAL. This will only work if you have the Twitter Blackbird Pie plugin installed. If you do, the shortcode queries the plugin and will attempt to skin all colected tweets using the Blackbird Pie method. Current testing indicates that the Blackbird plugin skins each tweet with an individual query to Twitter. As a result, for any collections of tweets over a certain unknown number Twitter will stop allowing you to query it and the remaining Tweets will fail to show up. 
 
     This plugin comes with default CSS styling. If you don't like it, you don't need to alter the plugin (and chance having your styling erased by an upgrade). Instead just create a stylesheet in your stylesheet directory called 'user-ta-style.css' and it will completely replace my stylesheet. 
 
@@ -53,15 +53,11 @@ The first time you save a post using the Twitter Archival shortcode and post or 
 
 = The timestamps on the tweets are all wrong! How can I get them to show my time? =
 
-Currently they all show GMT. This is because I have not yet figured out how to tell PHP to convert the time. If you know how to do this tell me. Until then, it will be only GMT. 
+You have not set the date-time, or have the wrong date-time set. You can now set the date-time for your archives from the options page for the plugin.  
 
 = When people change their avatars, it changes in my archive. =
 
 Currently the plugin does not archive avatars. 
-
-= People mentioning other peoples' usernames or other hashtags don't have those mentions linked. =
-
-This is true. I'm working on fixing it. Probably with jQuery. If you have any suggestions, tell me. I'm always looking for a better way. 
 
 = This is a big list of things I want to do! When will you get on fixing them, so that I can do this stuff? =
 
@@ -73,10 +69,13 @@ I don't think so, I hope not, but I can't tell you for certain. You use the plug
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
-2. This is the second screen shot
+1. `tascreenshot.png`
 
 == Changelog ==
+
+= 0.8 =
+* Created Dashboard options page for plugin with instructions for use. 
+* Now allow users to set a custom datetime for all archives to reference. 
 
 = 0.6 =
 * Fixed broken div.
@@ -88,6 +87,11 @@ I don't think so, I hope not, but I can't tell you for certain. You use the plug
 * Finally got it working. 
 
 == Upgrade Notice ==
+
+= 0.8 =
+* Created Dashboard options page for plugin with instructions for use. 
+* Now allow users to set a custom datetime for all archives to reference. 
+* Blackbird Pie Support
 
 = 0.5 =
 This version caches the chats, so you won't loose them in a week. 

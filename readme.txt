@@ -53,15 +53,11 @@ The first time you save a post using the Twitter Archival shortcode and post or 
 
 = The timestamps on the tweets are all wrong! How can I get them to show my time? =
 
-Currently they all show GMT. This is because I have not yet figured out how to tell PHP to convert the time. If you know how to do this tell me. Until then, it will be only GMT. 
+You have not set the date-time, or have the wrong date-time set. You can now set the date-time for your archives from the options page for the plugin.  
 
 = When people change their avatars, it changes in my archive. =
 
 Currently the plugin does not archive avatars. 
-
-= People mentioning other peoples' usernames or other hashtags don't have those mentions linked. =
-
-This is true. I'm working on fixing it. Probably with jQuery. If you have any suggestions, tell me. I'm always looking for a better way. 
 
 = This is a big list of things I want to do! When will you get on fixing them, so that I can do this stuff? =
 
@@ -73,10 +69,13 @@ I don't think so, I hope not, but I can't tell you for certain. You use the plug
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
-2. This is the second screen shot
+1. `tascreenshot.png`
 
 == Changelog ==
+
+= 0.8 =
+* Created Dashboard options page for plugin with instructions for use. 
+* Now allow users to set a custom datetime for all archives to reference. 
 
 = 0.6 =
 * Fixed broken div.
@@ -88,6 +87,11 @@ I don't think so, I hope not, but I can't tell you for certain. You use the plug
 * Finally got it working. 
 
 == Upgrade Notice ==
+
+= 0.8 =
+* Created Dashboard options page for plugin with instructions for use. 
+* Now allow users to set a custom datetime for all archives to reference. 
+* Blackbird Pie Support
 
 = 0.5 =
 This version caches the chats, so you won't loose them in a week. 
