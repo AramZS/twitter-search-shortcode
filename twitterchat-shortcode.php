@@ -354,7 +354,7 @@ add_action( 'wp_enqueue_scripts', 'style_twitter_search_archive', 1 );
 // Since anything that auto-styles Twitter hashtags and at signs will mess up the workings of the shortcode, here's a built in alternative. No need to run another plugin. 
 // Adapted from code at http://stackoverflow.com/questions/4913555/find-twitter-hashtags-using-jquery-and-apply-a-link
 function zs_twitter_linked() {
-	wp_enqueue_script('jquery-cycle', get_bloginfo('stylesheet_directory') . '/library/extensions/jquery.cycle.all.js">', array('jquery'));
+	wp_enqueue_script( 'jquery' );
 	?>
 		<script type="text/javascript">
 		<!--Note here the \s at the begining of the regular expression here. This is to enforce that it will only select from hashtags with a space in front of them. Otherwise it may alter links to anchors.-->
