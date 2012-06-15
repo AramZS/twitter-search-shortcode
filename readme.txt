@@ -11,6 +11,8 @@ This plugin allows you to place a shortcode in your post that will archive a Twi
 
 This plugin allows you to place a shortcode in your post that will archive a Twitter search term, including hashtags. 
 
+Now upgraded to take advantage of WordPress's native oEmbed of tweets!
+
 Shortcode [searchtwitter] options:
 
 *   [searchtwitter for="#term"] - The 'for' attribute allows you to designate the search term you wish to search for and archive. You can use any term you'd normally but into the search.twitter.com search box. If you don't put anything in there, it will just search for me, which is cool and all, but probobly not what you want. It doesn't have to be a hashtag.
@@ -73,6 +75,9 @@ I don't think so, I hope not, but I can't tell you for certain. You use the plug
 
 == Changelog ==
 
+= 0.85 =
+* Built in integration with WordPress's oEmbed function for tweets. 
+
 = 0.8 =
 * Created Dashboard options page for plugin with instructions for use. 
 * Now allow users to set a custom datetime for all archives to reference. 
@@ -87,6 +92,9 @@ I don't think so, I hope not, but I can't tell you for certain. You use the plug
 * Finally got it working. 
 
 == Upgrade Notice ==
+
+= 0.85 =
+* Now upgraded to take advantage of WordPress's native oEmbed of tweets!
 
 = 0.8 =
 * Created Dashboard options page for plugin with instructions for use. 
