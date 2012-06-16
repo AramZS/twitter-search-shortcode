@@ -65,6 +65,7 @@ function ta_admin_init(){
 	register_setting( 'ta_options', 'ta_options', 'ta_options_validate' );
 	add_settings_section('ta_main', 'Main Settings', 'ta_section_text', 'twitter_archive');
 	add_settings_field('ta_datetime_select', 'Set Twitter Archive Timezone', 'ta_settings_datetime', 'twitter_archive', 'ta_main');
+	add_settings_field('ta_threefour_select', 'Set Use of oEmbed', 'ta_settings_threefour', 'twitter_archive', 'ta_main');
 }
 
 function ta_section_text() {
@@ -116,14 +117,42 @@ function ta_settings_datetime() {
 	
 }
 
+function ta_settings_threefour() {
+
+	$options = get_option('ta_options');
+	//pull in previous selection to display. 
+	$setvalue = $options['threefour'];
+	//If the user has selected yes, make sure it displays.
+	if ($setvalue == "yes"){
+		?>
+			<input type="checkbox" id="ta_threefour_select" name="ta_options[threefour]" value="yes" checked /> Use WordPress 3.4 oEmbed to show Tweets? (May not work)
+		<?php
+	} else {
+		?>
+			<input type="checkbox" id="ta_threefour_select" name="ta_options[threefour]" value="yes" /> Use WordPress 3.4 oEmbed to show Tweets? (May not work)
+		<?php
+	
+	}
+	
+}
+
 // validate our options
 function ta_options_validate($input) {
-$newinput['datetime'] = trim($input['datetime']);
-//die( preg_match( '!\w!i', $newinput['datetime'] ) );
-if(!preg_match('/^[-_\w\/]+$/i', $newinput['datetime'])) {
-$newinput['datetime'] = '';
-}
-return $newinput;
+	$options = get_option('ta_options');
+	
+	$options['datetime'] = trim($input['datetime']);
+	//die( preg_match( '!\w!i', $newinput['syndicate'] ) );
+	if(!preg_match('/^[-_\w\/]+$/i', $options['datetime'])) {
+		$options['datetime'] = '';
+	}
+
+
+	$options['threefour'] = trim($input['threefour']);
+	if(!preg_match('/^[-_\w\/]+$/i', $options['threefour'])) {
+		$options['threefour'] = '';
+	}
+	
+	return $options;
 }
 
 ?>

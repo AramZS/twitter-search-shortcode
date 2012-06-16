@@ -62,6 +62,8 @@ $page=1;
 //You may want to limit it by a day, month, or year. In which case we will need this:
 $keepGoing = true;
 
+$threefour = $ta_option_array['threefour'];
+
 function twitter_search_archive( $atts ) {
 
 
@@ -286,7 +288,7 @@ function output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird)
 						{
 						
 							//Now, we check if the version of WordPress we are running is equal to or greater than 3.4.
-							if ($floatWPVer >= 3.4){
+							if (($floatWPVer >= 3.4) && ($threefour == "yes")){
 
 								
 								$outputlink = (string) $entry->link[0]['href'];
@@ -310,7 +312,7 @@ function output_data($xml,$datelimit,$ordered,$keepGoing,$blackbird)
 					} //End of datecheck. 
 					else {
 						//Now, we check if the version of WordPress we are running is equal to or greater than 3.4.
-						if ($floatWPVer >= 3.4){
+						if (($floatWPVer >= 3.4) && ($threefour == "yes")){
 
 							
 							$outputlink = (string) $entry->link[0]['href'];
