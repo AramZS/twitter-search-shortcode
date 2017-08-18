@@ -1,3 +1,5 @@
+### This plugin no longer works, since Twitter has turned off RSS access. I have stopped supporting it
+
 === Plugin Name ===
 Contributors: aramzs
 Donate link: http://aramzs.me/
